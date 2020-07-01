@@ -1,0 +1,26 @@
+html {
+  margin: 0;
+  padding: 0px;
+}
+
+body {
+  display: flex;
+}
+
+.test2 {
+  background-color: coral;
+  width: 1000px;
+  height: 500px;
+}
+
+.test3 {
+  display: flex;
+  flex-direction: column;
+}
+
+.test4 {
+  border: 2px solid cyan;
+  width: 50px;
+  height: 50px;
+  padding: 10px;
+}

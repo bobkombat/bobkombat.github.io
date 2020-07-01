@@ -23,3 +23,30 @@ for (let i = 0; i < list.length; i++)
 
 var z = document.querySelector('body');
 console.log(z);
+
+
+var div = document.getElementsByTagName('p')
+console.log(div);
+
+console.log(div.length);
+console.log(typeof div);
+div[1].style.background = 'blue';
+//console.log(div[0].textContent);
+
+for (let i = 0; i < 10; i++)
+{
+  let div1 = document.createElement("div");
+  div1.className = "test3";
+  let x = document.getElementsByClassName('test2');
+  document.body.appendChild(div1);
+  for (let j = 0; j < 20; j++)
+  {
+    let div2 = document.createElement("div");
+    div2.className = "test4";
+    let z = document.getElementsByClassName('test3');
+    document.body.appendChild(div2);
+  }
+}
+
+var flex = document.getElementsByClassName('test4')
+console.log(flex);
