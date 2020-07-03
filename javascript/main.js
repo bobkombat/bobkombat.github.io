@@ -1,4 +1,4 @@
-import {setCons, aStar} from './a*.js';
+import {aStar} from './astar.js';
 // console.log(x);
 
 let test = document.getElementById("test2");
@@ -32,15 +32,15 @@ const arr2 = arr1[0].childNodes;
 const length1 = arr1.length;
 const length2 = arr2.length;
 
-//SET THE BACKGROUND COLOR
-for (let i = 0; i < length1; i++)
-{
-  for (let j = 0; j < length2; j++)
-  {
-    //if (j % 2)
-      //arr1[i].childNodes[j].style.background = "#d0d0d0";
-  }
-}
+// // SET THE BACKGROUND COLOR
+// for (let i = 0; i < length1; i++)
+// {
+//   for (let j = 0; j < length2; j++)
+//   {
+//     //if (j % 2)
+//       //arr1[i].childNodes[j].style.background = "#d0d0d0";
+//   }
+// }
 
 
 //ARRAY
@@ -57,32 +57,62 @@ arr1[length1 - 1].childNodes[length2 - 1].style.background = "red";
 
 //START, END VALUE
   //start
-let start;
+var startIndex;
 for (let i = 0; i < length1; i++)
 {
   for (let j = 0; j < length2; j++) {
     const x = arr1[i].childNodes[j].style.background.split(' ');
     if (x[0] == "lime") {
-      start = [i, j];
+      startIndex = [i, j];
       break;
     }
   }
 }
   //end
-let end;
+var endIndex;
 for (let i = length1 - 1; i >= 0; i--)
 {
   for (let j = length2 - 1; j >= 0; j--) {
     const x = arr1[i].childNodes[j].style.background.split(' ');
     if (x[0] == "red") {
-      end = [i, j];
+      endIndex = [i, j];
       break;
     }
   }
 }
 
-//Set value
-setCons(array);
-console.log(array[0][0]);
+// OBJECT ARRAY
+for (let i = 0; i < array.length; i++)
+{
+  for (let j = 0; j < length2; j++)
+  {
+    const obj = (x, y, status="", wall=false, f=0, g=0, h=0) => ({x, y, status, wall, f, g, h});
+    const x = arr1[i].childNodes[j].style.background.split(' ');
+    if (x[0] == "lime")
+    {
+      array[i][j] = obj(j, i, "start", undefined, undefined, undefined, undefined);
+    }
+    else if (x[0] == "red")
+    {
+      array[i][j] = obj(j, i, "end", undefined, undefined, undefined, undefined);
+    }
+    else if (x[0] == "black")
+    {
+      array[i][j] = obj(j, i, undefined, true, undefined, undefined, undefined);
+    }
+    else
+    {
+      array[i][j] = obj(j, i, "", false, 0, 0, 0);
+    }
+  }
+}
+console.log(array[1][1], array[1][0]);
+array[0][1]['f'] = 0;
+console.log(array[0][1]);
+console.log(array[startIndex[0]][startIndex[1]]);
+var start = array[startIndex[0]][startIndex[1]];
+var end = array[endIndex[0]][endIndex[1]];
+console.log(start, end);
+console.log(aStar(start, end))
 
 export {arr1, listArr1, arr2, length2, length1, array, start, end};
