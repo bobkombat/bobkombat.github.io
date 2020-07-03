@@ -17,6 +17,7 @@ for (let i = 0; i < 30; i++)
     div2.className = "test4";
     let set = document.querySelectorAll("#test3");
     document.getElementsByClassName("test3")[i].appendChild(div2);
+
   }
 }
 
@@ -31,16 +32,7 @@ const arr2 = arr1[0].childNodes;
 //length of each array
 const length1 = arr1.length;
 const length2 = arr2.length;
-
-// // SET THE BACKGROUND COLOR
-// for (let i = 0; i < length1; i++)
-// {
-//   for (let j = 0; j < length2; j++)
-//   {
-//     //if (j % 2)
-//       //arr1[i].childNodes[j].style.background = "#d0d0d0";
-//   }
-// }
+console.log(length1, length2);
 
 
 //ARRAY
@@ -49,56 +41,59 @@ for (let i = 0; i < length1; i++)
 {
   array[i] = new Array(length2);
 }
-// console.log(array[0]);
+
 
 //start and end color;
-arr2[0].style.background = "lime";
-arr1[length1 - 1].childNodes[length2 - 1].style.background = "red";
+arr1[Math.floor(Math.random() * length1)].childNodes[[Math.floor(Math.random() * length2)]].style.background = "lime";
+arr1[Math.floor(Math.random() * length1)].childNodes[[Math.floor(Math.random() * length2)]].style.background = "red";
 
-//START, END VALUE
-  //start
-var startIndex;
+//NO WALL
 for (let i = 0; i < length1; i++)
 {
-  for (let j = 0; j < length2; j++) {
+  for (let j = 0; j < length2; j++)
+  {
     const x = arr1[i].childNodes[j].style.background.split(' ');
-    if (x[0] == "lime") {
-      startIndex = [i, j];
-      break;
-    }
+    let z = Math.floor(Math.random() * 0);
+    if (z && x[0] !== "red" && x[0] !== "lime")
+      arr1[i].childNodes[j].style.background = "#000B34";
   }
 }
-  //end
-var endIndex;
-for (let i = length1 - 1; i >= 0; i--)
+
+//RANDOMIZE WALL
+for (let i = 0; i < length1; i++)
 {
-  for (let j = length2 - 1; j >= 0; j--) {
+  for (let j = 0; j < length2; j++)
+  {
     const x = arr1[i].childNodes[j].style.background.split(' ');
-    if (x[0] == "red") {
-      endIndex = [i, j];
-      break;
-    }
+    let z = Math.floor(Math.random() * 2);
+    if (z && x[0] !== "red" && x[0] !== "lime")
+      arr1[i].childNodes[j].style.background = "#000B34";
   }
 }
 
 // OBJECT ARRAY
+var startIndex;
+var endIndex;
 for (let i = 0; i < array.length; i++)
 {
   for (let j = 0; j < length2; j++)
   {
     const obj = (x, y, status="", wall=false, f=0, g=0, h=0) => ({x, y, status, wall, f, g, h});
     const x = arr1[i].childNodes[j].style.background.split(' ');
+    // console.log(x);
     if (x[0] == "lime")
     {
+      startIndex = [i, j];
       array[i][j] = obj(j, i, "start", undefined, undefined, undefined, undefined);
     }
     else if (x[0] == "red")
     {
+      endIndex = [i, j];
       array[i][j] = obj(j, i, "end", undefined, undefined, undefined, undefined);
     }
-    else if (x[0] == "black")
+    else if (x.length == 8)
     {
-      array[i][j] = obj(j, i, undefined, true, undefined, undefined, undefined);
+      array[i][j] = obj(j, i, undefined, true, undefined, 0, undefined);
     }
     else
     {
@@ -106,10 +101,9 @@ for (let i = 0; i < array.length; i++)
     }
   }
 }
-console.log(array[1][1], array[1][0]);
+
 array[0][1]['f'] = 0;
-console.log(array[0][1]);
-console.log(array[startIndex[0]][startIndex[1]]);
+
 var start = array[startIndex[0]][startIndex[1]];
 var end = array[endIndex[0]][endIndex[1]];
 console.log(start, end);
