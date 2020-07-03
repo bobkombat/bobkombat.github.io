@@ -35,7 +35,7 @@ export function aStar(start, goal)
     // console.log(openList[0], start, goal);
     let currentNodeIndex = 0;
     let currentNode = openList[0];
-    for (let i = length - 1; i >= 1; i--)
+    for (let i = openList.length - 1; i >= 1; i--)
     {
       if (openList[i].f < currentNode.f)
       {
